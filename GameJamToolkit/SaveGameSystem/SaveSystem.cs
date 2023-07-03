@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using IceBlink.GameJamToolkit.Serialization.SaveSlots;
-using IceBlink.GameJamToolkit.Serialization.SaveSystems;
+using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
+using IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Serialization
+namespace IceBlink.GameJamToolkit.SaveGameSystem
 {
     public class SaveSystem : MonoBehaviour
     {

@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Serialization.SaveSlots
+namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots
 {
     public static class SaveSlotSelector
     {

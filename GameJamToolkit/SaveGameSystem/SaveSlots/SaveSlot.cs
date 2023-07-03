@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IceBlink.GameJamToolkit.Serialization.SaveSlots
+namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots
 {
     public class SaveSlot
     {

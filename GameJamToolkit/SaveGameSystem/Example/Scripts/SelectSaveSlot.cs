@@ -1,7 +1,7 @@
-﻿using IceBlink.GameJamToolkit.Serialization.SaveSlots;
+﻿using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Serialization.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 {
     public class SelectSaveSlot : MonoBehaviour
     {

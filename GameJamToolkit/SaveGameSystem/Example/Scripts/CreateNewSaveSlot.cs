@@ -1,9 +1,9 @@
-﻿using IceBlink.GameJamToolkit.Serialization.SaveSlots;
+﻿using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IceBlink.GameJamToolkit.Serialization.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 {
     public class CreateNewSaveSlot : MonoBehaviour
     {

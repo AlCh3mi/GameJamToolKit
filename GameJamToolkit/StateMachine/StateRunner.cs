@@ -2,7 +2,7 @@
 
 namespace IceBlink.GameJamToolkit.StateMachine
 {
-    public abstract class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class StateRunner<T> : MonoBehaviour where T : StateRunner<T>
     {
         [SerializeField] protected State<T> startingState;
         [SerializeField] private bool showOnDrawGizmosSelected = true;
@@ -20,7 +20,7 @@ namespace IceBlink.GameJamToolkit.StateMachine
                 _activeState.ExitState();
 
             _activeState = Instantiate(newState);
-            _activeState.EnterState(GetComponent<T>());
+            _activeState.EnterState(this as T);
         }
 
         protected virtual void Update()

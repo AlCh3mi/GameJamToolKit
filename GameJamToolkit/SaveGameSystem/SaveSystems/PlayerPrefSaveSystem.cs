@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Serialization.SaveSystems
+namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public class PlayerPrefSaveSystem : ISaveSystem
     {

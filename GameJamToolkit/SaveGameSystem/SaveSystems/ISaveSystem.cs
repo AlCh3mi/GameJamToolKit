@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace IceBlink.GameJamToolkit.Serialization.SaveSystems
+namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public interface ISaveSystem
     {

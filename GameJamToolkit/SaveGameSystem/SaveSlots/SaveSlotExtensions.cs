@@ -1,4 +1,4 @@
-﻿namespace IceBlink.GameJamToolkit.Serialization.SaveSlots
+﻿namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots
 {
     public static class SaveSlotExtensions
     {

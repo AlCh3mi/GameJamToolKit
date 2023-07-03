@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using IceBlink.GameJamToolkit.Serialization.SaveSlots;
+using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Serialization.SaveSystems
+namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public class FileSaveSystem : ISaveSystem
     {

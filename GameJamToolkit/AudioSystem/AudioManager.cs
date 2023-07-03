@@ -1,9 +1,10 @@
+using IceBlink.GameJamToolkit.Singletons;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace IceBlink.GameJamToolkit.AudioSystem
 {
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : Singleton<AudioManager>
     {
         [Header("Default Sound Settings")]
         [Tooltip("It will retrieve players audio settings from PlayerPrefs at startup, if not the defaults will be applied")]
@@ -16,9 +17,7 @@ namespace IceBlink.GameJamToolkit.AudioSystem
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource effectsSource;
         [SerializeField] private AudioMixer mixer;
-
-        public static AudioManager Instance { get; private set; }
-
+        
         //these strings need to match the exposed parameters on the AudioMixer
         private const string MASTERVOLUME = "MasterVol";
         private const string MUSICVOLUME = "MusicVol";
@@ -33,18 +32,6 @@ namespace IceBlink.GameJamToolkit.AudioSystem
         public AudioClip CurrentMusic => musicSource.clip;
 
         public bool IsMusicPlaying => musicSource.isPlaying;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-                return;
-            }
-            
-            DestroyImmediate(gameObject);
-        }
 
         private void Start() => SetMixerVolumeValues();
 

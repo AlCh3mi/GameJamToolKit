@@ -36,14 +36,9 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Defenses
             ResistanceUpdatedEvent?.Invoke(Resistances[resistance.damageType]);
         }
 
-        public float GetResistancePercentageVs(DamageType type)
-        {
-            if (type == null)
-                return 0f;
-            
-            return !Resistances.ContainsKey(type) ? 0f : Resistances[type].amount;
-        }
+        public float GetResistancePercentageVs(DamageType type) 
+            => Resistances.TryGetValue(type, out var resistance) ? resistance.amount : 0f;
 
-        public DamageReport DefendAgainst(DamageInstance damageInstance) => new DamageReport(damageInstance, this);
+        public DamageReport DefendAgainst(DamageInstance damageInstance) => new (damageInstance, this);
     }
 }

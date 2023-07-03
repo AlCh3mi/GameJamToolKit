@@ -12,14 +12,16 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Defenses
         public event Action<float,float> HealthChanged;
         public event Action Damaged;
         public event Action Death;
-    
-    
+        
         private float current;
         public float Current
         {
             get => current;
             private set
             {
+                if(Mathf.Approximately(current, value))
+                    return;
+                
                 current = Mathf.Clamp(value, 0, Max);
                 HealthChanged?.Invoke(current, Max);
             }
@@ -27,13 +29,19 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Defenses
     
         public float Max 
         { 
-            get => max; 
-            private set => max = Mathf.Clamp(value, 0, float.MaxValue); 
+            get => max;
+            private set
+            {
+                if(Mathf.Approximately(max, value))
+                    return;
+                
+                max = Mathf.Clamp(value, 0, float.MaxValue);
+                HealthChanged?.Invoke(Current, max);
+            } 
         }
     
         public bool IsFull => Current >= Max;
         public bool IsDead => Current <= 0 ;
-
         private bool Vulnerable => Time.time - LastDamaged >= InvulnerabilityPeriodOnDamaged;
         public float LastDamaged { get; private set; }
 
@@ -64,9 +72,9 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Defenses
                 return;
         
             Max = newMax;
-        
+            
             if(Current > Max)
-                Current = Max;
+                Current = newMax;
         }
     
         public void Heal(float healing)

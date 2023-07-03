@@ -1,15 +1,14 @@
 ﻿using IceBlink.GameJamToolkit.DamageSystem.Damage;
+using IceBlink.GameJamToolkit.Singletons;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IceBlink.GameJamToolkit.DamageSystem.Indicators
 {
-    public class DamageIndicatorPool : MonoBehaviour
+    public class DamageIndicatorPool : Singleton<DamageIndicatorPool>
     {
         [SerializeField] private DamageIndicator damageIndicatorPrefab;
-    
-        public static DamageIndicatorPool Instance;
-
+        
         private IObjectPool<DamageIndicator> pool;
     
         public void SpawnIndicator(Vector3 worldPos, DamageReport damageInstance)
@@ -17,17 +16,6 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Indicators
             var indicator = pool.Get();
             indicator.transform.position = worldPos;
             indicator.SetDamage(damageInstance);
-        }
-
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
         }
 
         private void Start()
