@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.ObjectPooling
+namespace IceBlink.GameJamToolkit.ObjectPooling
 {
     public class PoolableObject : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.StateMachine
+namespace IceBlink.GameJamToolkit.StateMachine
 {
     public abstract class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
     {

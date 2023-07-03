@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.Diagnostics
+namespace IceBlink.GameJamToolkit.Diagnostics
 {
     public class ShowVersion : MonoBehaviour
     {

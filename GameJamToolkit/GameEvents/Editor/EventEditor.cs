@@ -8,7 +8,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.GameEvents.Editor
+namespace IceBlink.GameJamToolkit.GameEvents.Editor
 {
     [CustomEditor(typeof(GameEvent), editorForChildClasses: true)]
     public class EventEditor : UnityEditor.Editor

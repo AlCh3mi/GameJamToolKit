@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace IceBlink.GameJamToolkit.Common
+namespace IceBlink.GameJamToolkit
 {
     [RequireComponent(typeof(Collider))]
     public class TriggerCallbacks : MonoBehaviour

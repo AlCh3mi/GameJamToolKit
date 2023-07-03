@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Plugins.IceBlink.GameJamToolkit.GameEvents
+namespace IceBlink.GameJamToolkit.GameEvents
 {
     public class GameEventListener : MonoBehaviour
     {

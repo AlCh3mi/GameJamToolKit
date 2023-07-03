@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.Common
+namespace IceBlink.GameJamToolkit
 {
     public static class Extensions
     {

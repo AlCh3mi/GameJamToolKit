@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.GameEvents
+namespace IceBlink.GameJamToolkit.GameEvents
 {
     [CreateAssetMenu(menuName = "Events/Game Event")]
     public class GameEvent : ScriptableObject

@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace IceBlink.GameJamToolkit.Common
+namespace IceBlink.GameJamToolkit
 {
-    public class DeathScreen : MonoBehaviour
+    public class FadeToBlack : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private float fadeTime = 2f;

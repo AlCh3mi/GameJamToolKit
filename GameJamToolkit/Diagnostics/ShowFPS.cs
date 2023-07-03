@@ -1,7 +1,7 @@
 using System.Globalization;
 using UnityEngine;
 
-namespace Plugins.IceBlink.GameJamToolkit.Diagnostics
+namespace IceBlink.GameJamToolkit.Diagnostics
 {
     public class ShowFPS : MonoBehaviour
     {
