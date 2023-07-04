@@ -33,7 +33,7 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Example
             if(isTestingDotDamage)
                 enemy.AddDamageOverTime(0.5f, 5f, this);
             else
-                enemy.TakeDamage(new DamageInstance(this));
+                enemy.TakeDamage(this);
         }
     }
 }

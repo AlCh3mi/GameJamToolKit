@@ -58,11 +58,12 @@ namespace IceBlink.GameJamToolkit.DamageSystem
 
         public bool IsDead => Health.IsDead;
         
-        public DamageReport TakeDamage(DamageInstance damageInstance)
+        public DamageReport TakeDamage(IDamageDealer damageDealer)
         {
             if(Health.IsDead)
                 return default;
 
+            var damageInstance = new DamageInstance(damageDealer);
             var conflictResult = Defense.DefendAgainst(damageInstance);
             Health.TakeDamage(conflictResult.DamageAmount);
             damaged?.Invoke(conflictResult);

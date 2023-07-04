@@ -30,7 +30,7 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Damage
                 if (damageable.Health.IsDead)
                     yield break;
                 
-                damageable.TakeDamage(new DamageInstance(damageDealer));
+                damageable.TakeDamage(damageDealer);
                 
                 yield return delay;
                 duration -= tickInterval;
