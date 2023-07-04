@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.AssetManagement
+namespace IceBlink.GameJamToolkit.AssetManagement
 {
     public class StreamingAssetBundleLoader : IDisposable
     {

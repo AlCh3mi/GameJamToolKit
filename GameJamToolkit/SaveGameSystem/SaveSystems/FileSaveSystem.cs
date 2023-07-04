@@ -8,7 +8,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public class FileSaveSystem : ISaveSystem
     {
-        
         public async Task SaveData(string slotName, string key, string json)
         {
             var slotDirectory = SaveSlotSelector.GetSaveFolder(slotName);

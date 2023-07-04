@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEditor;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.AssetManagement.Editor
+namespace IceBlink.GameJamToolkit.AssetManagement.Editor
 {
     public static class CreateAssetBundles
     {
