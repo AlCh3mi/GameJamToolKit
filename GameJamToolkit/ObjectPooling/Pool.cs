@@ -1,19 +1,39 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IceBlink.GameJamToolkit.ObjectPooling
 {
-    public class Pool<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class Pool<T> : MonoBehaviour where T : MonoBehaviour
     {
         [SerializeField] protected T prefab;
         [SerializeField] protected int defaultSize = 10;
         [SerializeField] protected int capacity = 50;
-
+        [SerializeField] protected bool prewarm = true;
+        
         private IObjectPool<T> pool;
 
-        private void Start()
+        public IObjectPool<T> GetPool => pool;
+
+        private void Awake()
         {
             SetupPool();
+            
+            if(!prewarm)
+                return;
+
+            Prewarm();
+        }
+
+        private void Prewarm()
+        {
+            var cache = new T[defaultSize];
+
+            for (var i = 0; i < cache.Length; i++)
+                cache[i] = pool.Get();
+
+            foreach (var item in cache)
+                pool.Release(item);
         }
 
         private void SetupPool()
@@ -39,14 +59,8 @@ namespace IceBlink.GameJamToolkit.ObjectPooling
                 capacity);
         }
         
-        private void OnRetrieve(T obj)
-        {
-            obj.gameObject.SetActive(true);
-        }
+        protected virtual void OnRetrieve(T obj) => obj.gameObject.SetActive(true);
 
-        private void OnReturned(T obj)
-        {
-            obj.gameObject.SetActive(false);
-        }
+        protected virtual void OnReturned(T obj) => obj.gameObject.SetActive(false);
     }
 }

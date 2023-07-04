@@ -56,7 +56,7 @@ namespace IceBlink.GameJamToolkit.AudioSystem
             if(pause)
                 musicSource.Pause();
             else
-                musicSource.Play();
+                musicSource.UnPause();
         }
         
         public void StopMusic()
@@ -66,6 +66,8 @@ namespace IceBlink.GameJamToolkit.AudioSystem
             
             if(musicSource.isPlaying)
                 musicSource.Stop();
+
+            musicSource.time = 0f;
         }
         
         public void PlayOneShot(AudioClip clip)

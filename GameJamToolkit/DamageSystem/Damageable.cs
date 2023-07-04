@@ -55,6 +55,8 @@ namespace IceBlink.GameJamToolkit.DamageSystem
                     : gameObject.AddComponent<DamageOverTime>();
             }
         }
+
+        public bool IsDead => Health.IsDead;
         
         public void TakeDamage(DamageInstance damageInstance)
         {

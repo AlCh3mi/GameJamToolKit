@@ -4,9 +4,10 @@ namespace IceBlink.GameJamToolkit.StateMachine
 {
     public abstract class StateRunner<T> : MonoBehaviour where T : StateRunner<T>
     {
+        [Header("State Machine")]
         [SerializeField] protected State<T> startingState;
-        [SerializeField] private bool showOnDrawGizmosSelected = true;
-                
+        [SerializeField] private bool showStateOnDrawGizmos = true;
+        
         protected State<T> _activeState;
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace IceBlink.GameJamToolkit.StateMachine
 
         private void OnDrawGizmosSelected()
         {
-            if(!showOnDrawGizmosSelected)
+            if(!showStateOnDrawGizmos)
                 return;
             
             if(_activeState != null)
