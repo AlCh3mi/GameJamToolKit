@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 {
-    public class SaveSlotView : MonoBehaviour, IPointerClickHandler
+    //this should probably just use a button, but here we are
+    public class SaveSlotView : MonoBehaviour, IPointerClickHandler 
     {
         [SerializeField] private TMP_Text slotNameText;
         [SerializeField] private TMP_Text lastSavedText;

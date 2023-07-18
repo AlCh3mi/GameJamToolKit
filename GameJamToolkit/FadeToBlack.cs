@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace IceBlink.GameJamToolkit
 {
+    //I added DoTween to the collection after making this file, so now im committed...
+    //but it could probably be replaced with a DoFade oneliner...
+    //thanks Vicot for pointing that out. -_- 
     public class FadeToBlack : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup;
@@ -12,9 +16,27 @@ namespace IceBlink.GameJamToolkit
 
         public UnityEvent fadeToBlackCompleted;
 
-        public void StartDeathSequence() => StartCoroutine(DeathSequence());
+        private Coroutine fadeRoutine;
 
-        private IEnumerator DeathSequence()
+        private void Awake()
+        {
+            if (!canvasGroup)
+                canvasGroup = GetComponent<CanvasGroup>();
+        }
+
+        [ContextMenu("Fade To Black")]
+        public void Fade()
+        {
+            if(!canvasGroup)
+                return;
+            
+            if(fadeRoutine != null)
+                StopCoroutine(fadeRoutine);
+            
+            fadeRoutine = StartCoroutine(FadeRoutine());
+        }
+
+        private IEnumerator FadeRoutine()
         {
             var elapsed = 0f;
             while (elapsed <= fadeTime)
@@ -27,6 +49,7 @@ namespace IceBlink.GameJamToolkit
             yield return new WaitForSeconds(delayFadeCompleted);
             
             fadeToBlackCompleted?.Invoke();
+            fadeRoutine = null;
         }
     }
 }

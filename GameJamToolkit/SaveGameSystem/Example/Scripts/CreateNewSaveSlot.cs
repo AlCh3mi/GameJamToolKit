@@ -9,7 +9,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
     {
         [SerializeField] private Button createButton;
         [SerializeField] private TMP_InputField inputField;
-
+        [SerializeField] private int minLength = 5;
         private void OnEnable()
         {
             inputField.onValueChanged.AddListener(OnInputFieldValueChanged);
@@ -31,7 +31,8 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 
         private void OnInputFieldValueChanged(string value)
         {
-            var isValidInput = true; //maybe regex? find out if there is a regex for OS filename restrictions
+            //todo: maybe regex? find out if there is a regex for OS filename restrictions
+            var isValidInput = !string.IsNullOrWhiteSpace(value) && value.Trim().Length >= minLength;
             createButton.interactable = isValidInput;
         }
     }
