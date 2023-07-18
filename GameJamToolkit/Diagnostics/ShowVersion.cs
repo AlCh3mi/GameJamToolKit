@@ -19,6 +19,9 @@ namespace IceBlink.GameJamToolkit.Diagnostics
                 _show = value;
             } 
         }
+
+        [ContextMenu("Show Version")]
+        public void Show() => Show(!ShowOnScreen);
         
         public void Show(bool show) => ShowOnScreen = show;
 

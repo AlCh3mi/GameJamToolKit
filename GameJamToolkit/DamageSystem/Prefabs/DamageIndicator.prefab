@@ -324,8 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e2265197d949f39f2f0dd4c29c8df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatHeight: 1
-  duration: 1
+  floatHeight: 2
+  duration: 2
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   criticalHitColor: {r: 1, g: 0.8650767, b: 0.07843137, a: 1}
   dmgText: {fileID: 7431365870031557521}

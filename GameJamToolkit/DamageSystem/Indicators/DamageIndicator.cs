@@ -38,11 +38,12 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Indicators
             canvasGroup.alpha = 1f;
 
             transform.localScale = Vector3.one * 0.5f;
-            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic);
+            //transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic);
 
             var sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMoveY(transform.position.y + floatHeight, duration).SetEase(Ease.OutQuad));
-            sequence.Append(canvasGroup.DOFade(0, 1f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic));
+            sequence.Join(transform.DOMoveY(transform.position.y + floatHeight, duration).SetEase(Ease.OutQuad));
+            sequence.Join(canvasGroup.DOFade(0, 1f).SetEase(Ease.OutQuad));
 
             sequence.OnComplete(() =>
             {

@@ -24,14 +24,17 @@ namespace IceBlink.GameJamToolkit.Diagnostics
             } 
         }
 
+        [ContextMenu("Show FPS Counter")]
+        public void Show() => Show(!ShowOnScreen);
+
         public void Show(bool show) => ShowOnScreen = show;
 
         private void Awake()
         {
-            ShowOnScreen = PlayerPrefs.GetInt("ShowFPS", 0) != 0;
+            ShowOnScreen = PlayerPrefs.GetInt("ShowFPS", 1) != 0;
         }
 
-        private void Update () 
+        private void Update() 
         {
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
             fps = 1.0f / deltaTime;
