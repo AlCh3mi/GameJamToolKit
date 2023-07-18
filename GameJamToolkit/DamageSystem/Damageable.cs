@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 namespace IceBlink.GameJamToolkit.DamageSystem
 {
-    [RequireComponent(typeof(Collider))]
     public class Damageable : MonoBehaviour
     {
         [Header("Defenses")]

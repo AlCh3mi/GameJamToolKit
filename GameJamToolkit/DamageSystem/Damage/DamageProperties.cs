@@ -12,4 +12,9 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Damage
         [field: SerializeField] public float CriticalHitChance { get; private set;}
         [field: SerializeField] public float CriticalHitDamage { get; private set;}
     }
+    
+    public interface IDamageDealer
+    {
+        public DamageProperties DamageProperties { get; }
+    }
 }
