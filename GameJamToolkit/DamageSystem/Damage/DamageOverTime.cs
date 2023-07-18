@@ -20,14 +20,14 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Damage
 
         private IEnumerator DotRoutine(float tickInterval, float duration, IDamageDealer damageDealer)
         {
-            if(damageable.Health.IsDead)
+            if(damageable.Health.IsDead || damageDealer == null)
                 yield break;
-            
+
             var delay = new WaitForSeconds(tickInterval);
             
             while (duration >= 0)
             {
-                if (damageable.Health.IsDead)
+                if (damageable.Health.IsDead /*|| damageDealer == null*/)
                     yield break;
                 
                 damageable.TakeDamage(damageDealer);
