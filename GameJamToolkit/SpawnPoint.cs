@@ -4,11 +4,17 @@ namespace IceBlink.GameJamToolkit
 {
     public class SpawnPoint : MonoBehaviour
     {
-        private void OnDrawGizmosSelected()
+        [SerializeField] protected float radius = 0.5f;
+        [SerializeField] protected Color color = Color.blue;
+        protected void OnDrawGizmosSelected()
         {
+            var tmpColor = Gizmos.color;
             var position = transform.position;
-            Gizmos.DrawSphere(position, 0.25f);
-            Gizmos.DrawLine(position, position + transform.forward);
+            Gizmos.color = color;
+            Gizmos.DrawSphere(position, radius);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(position, position + (transform.forward * radius));
+            Gizmos.color = tmpColor;
         }
     }
 }
