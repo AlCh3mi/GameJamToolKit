@@ -1,0 +1,17 @@
+﻿{
+  "name": "com.iceblink.gamejamtoolkit",
+  "displayName": "GameJamToolKit",
+  "version": "0.0.1",
+  "unity": "2018.4",
+  "description": "Quick prototyping tools",
+  "keywords": [ "prototype", "gamejam", "toolkit" ],
+  "category": "editor extensions",
+  "dependencies": { 
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "samples": [],
+  "author": {
+    "name": "Michael van der Poll",
+    "url": "https://github.com/AlCh3mi/GameJamToolKit"
+  }
+}
