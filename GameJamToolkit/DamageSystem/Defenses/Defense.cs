@@ -9,12 +9,12 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Defenses
     {
         public Dictionary<DamageType, Resistance> Resistances;
 
-        public event Action<Resistance> ResistanceUpdatedEvent; 
+        public event Action<Resistance> ResistanceUpdatedEvent;
 
         public Defense(List<Resistance> resistances = null)
         {
             Resistances = new Dictionary<DamageType, Resistance>();
-            if (resistances == null || resistances.Count == 0) 
+            if (resistances == null || resistances.Count == 0)
                 return;
 
             foreach (var resistance in resistances)

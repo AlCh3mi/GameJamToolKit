@@ -42,7 +42,7 @@ namespace IceBlink.GameJamToolkit.DamageSystem
             }
         }
         
-        private DamageOverTime DoT
+        private DamageOverTime DamageOverTime
         {
             get
             {
@@ -71,7 +71,7 @@ namespace IceBlink.GameJamToolkit.DamageSystem
 
         public void AddDamageOverTime(float tickInterval, float duration, IDamageDealer damageDealer)
         {
-            DoT.AddDotDamage(tickInterval, duration, damageDealer);
+            DamageOverTime.AddDotDamage(tickInterval, duration, damageDealer);
         }
         
         private void Awake()
