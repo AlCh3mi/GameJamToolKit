@@ -1,6 +1,6 @@
 # IceBlink - Game Jam Tool Kit
 
-IceBlink is a Unity package designed to aid quick prototyping and streamline game development during game jams. It provides a collection of useful tools and features to help you focus on creating a fun and engaging game without spending too much time on repetitive tasks.
+Game Jam Tool Kit is a Unity package designed to aid quick prototyping and streamline game development during game jams. It provides a collection of useful scripts, components, and prefabs and features to help you focus on creating a fun and engaging game without spending too much time on repetitive tasks.
 
 *Documentation and more sample projects to be released soon*
 
@@ -41,9 +41,7 @@ Documentation and Tutorials: Comprehensive documentation and step-by-step tutori
 
 ## Game Events
 
-
 ## Asset Library
-
 
 ## Contributing
 
