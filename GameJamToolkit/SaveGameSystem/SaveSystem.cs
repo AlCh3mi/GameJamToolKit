@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
-using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
+﻿using System;
+using System.Threading.Tasks;
 using IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems;
+using IceBlink.GameJamToolkit.Singletons;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem
 {
-    public class SaveSystem : MonoBehaviour
+    public class SaveSystem : Singleton<SaveSystem>
     {
+        [SerializeField] private SaveSystemType saveType = SaveSystemType.FileSave;
+        
         private ISaveSystem saveSystem;
         
-        [SerializeField] private SaveSystemType saveType;
-        
-        private SaveSlot ActiveSaveSlot => SaveSlotSelector.ActiveSaveSlot;
-
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             switch (saveType)
             {
                 default:
@@ -28,37 +30,35 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
             Debug.Log("Save System Created: "+saveSystem.GetType().Name);
         }
 
-        #pragma warning disable CS1998
-        [ContextMenu("Save")]
-        public async void Save()
+        public void Save(string key, string json)
         {
-            //todo implement what needs to be saved, and how?
-            
-            //var saveables = FindAllSaveables();
-            //await saveSystem.SaveData(activeSaveSlot.Name, "WorldState", saveable.AsJson());
+            saveSystem.SaveData(key, json);
         }
-
-        [ContextMenu("Load")]
-        public async void Load()
-        {
-            //todo, implement Load Game logic here
-        }
-        #pragma warning restore CS1998
         
-        private static ISaveable[] FindAllSaveables()
+        public async Task<T> Load<T>(string key)
         {
-            var saveables = FindObjectsOfType<GameObject>();
-
-            var result = new List<ISaveable>();
-
-            foreach (var saveable in saveables)
+            try
             {
-                var components = saveable.GetComponentsInChildren<ISaveable>();
-
-                foreach (var component in components)
-                    result.Add(component);
+                if (!SaveExists(key))
+                {
+                    Debug.LogWarning("SaveSystem: Save file does not exist.");
+                    return default;
+                } 
+                        
+                var json = await saveSystem.LoadData(key);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            return result.ToArray();
+            catch (Exception e)
+            {
+                Debug.LogError("SaveSystem : Something went wrong - "+e);
+            }
+
+            return default;
+        }
+
+        public bool SaveExists(string key)
+        {
+            return saveSystem.SaveExists(key);
         }
     }
 }

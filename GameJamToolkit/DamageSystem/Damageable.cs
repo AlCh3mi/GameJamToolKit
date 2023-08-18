@@ -25,7 +25,7 @@ namespace IceBlink.GameJamToolkit.DamageSystem
         public Health Health
         {
             get => _health;
-            private set
+            set
             {
                 _health = value;
                 SignUpToHealthEvents();

@@ -1,22 +1,30 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
+using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
 using UnityEngine;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public class FileSaveSystem : ISaveSystem
     {
-        public async Task SaveData(string slotName, string key, string json)
+        public bool SaveExists(string key)
         {
-            var slotDirectory = SaveSlotSelector.GetSaveFolder(slotName);
-            var saveFilePath = SaveSlotSelector.GetSaveFilePath(slotName, key);
+            var profileName = ProfileSelector.ActiveProfile.Name;
+            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
+            return File.Exists(saveFilePath);
+        }
+        
+        public async Task SaveData(string key, string json)
+        {
+            var profileName = ProfileSelector.ActiveProfile.Name;
+            var saveDirectory = ProfileSelector.GetSaveFolder(profileName);
+            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
 
             try
             {
-                if (!Directory.Exists(slotDirectory))
-                    Directory.CreateDirectory(slotDirectory);
+                if (!Directory.Exists(saveDirectory))
+                    Directory.CreateDirectory(saveDirectory);
 
                 await using var sw = new StreamWriter(saveFilePath);
                 await sw.WriteAsync(json);
@@ -27,25 +35,28 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
             }
         }
 
-        public async Task<T> LoadData<T>(string slotName, string key)
+        public async Task<string> LoadData(string key)
         {
-            var saveFilePath = SaveSlotSelector.GetSaveFilePath(slotName, key);
-
+            var profileName = ProfileSelector.ActiveProfile.Name;
+            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
+            
             try
             {
                 using var sr = new StreamReader(saveFilePath);
                 var json = await sr.ReadToEndAsync();
-                return JsonUtility.FromJson<T>(json);
+                Debug.Log($"LoadedData {key} \n{json}");
+                return json;
             }
             catch (FileNotFoundException e)
             {
-                Debug.LogError($"File Save System: Unable to find file ({saveFilePath}): {e.Message}");
+                Debug.LogError($"FileSaveSystem: Unable to find file ({saveFilePath}): {e.Message}");
+                throw;
             }
             catch (Exception e)
             {
                 Debug.LogException(e);
             }
-            return default;
+            return string.Empty;
         }
     }
 }

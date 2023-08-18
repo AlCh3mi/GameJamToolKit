@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
 {
-    public class SaveSlot
+    public class Profile
     {
         public string Name;
         public DateTime LastSave;

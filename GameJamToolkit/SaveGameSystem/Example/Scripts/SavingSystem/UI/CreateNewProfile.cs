@@ -1,11 +1,11 @@
-﻿using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
+﻿using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
 {
-    public class CreateNewSaveSlot : MonoBehaviour
+    public class CreateNewProfile : MonoBehaviour
     {
         [SerializeField] private Button createButton;
         [SerializeField] private TMP_InputField inputField;
@@ -18,8 +18,8 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 
         private void OnCreateButtonClicked()
         {
-            SaveSlotSelector.SetActiveSaveSlot(inputField.text);
-            GetComponentInParent<SelectSaveSlot>().Repaint();
+            ProfileSelector.SetActiveProfile(inputField.text);
+            GetComponentInParent<SelectProfile>().Repaint();
             gameObject.SetActive(false);
         }
 

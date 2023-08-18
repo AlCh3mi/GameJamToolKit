@@ -1,11 +1,11 @@
-﻿using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
+﻿using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
 {
-    public class SelectSaveSlot : MonoBehaviour
+    public class SelectProfile : MonoBehaviour
     {
-        [SerializeField] private SaveSlotView prefab;
+        [SerializeField] private ProfileView prefab;
         [SerializeField] private Transform parent;
         
         private void Start()
@@ -23,10 +23,10 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         {
             Clear();
             
-            foreach (var slot in SaveSlotSelector.SaveSlots)
+            foreach (var kvp in ProfileSelector.Profiles)
             {
                 var instance = Instantiate(prefab, parent);
-                instance.Setup(slot.Value);
+                instance.Setup(kvp.Value);
                 instance.Selected += () =>
                 {
                     gameObject.SetActive(false);
