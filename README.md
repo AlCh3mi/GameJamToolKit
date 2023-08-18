@@ -52,6 +52,3 @@ If you find any issues or have suggestions for new features, please create an is
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-If you've used any third-party assets or code, acknowledge their creators here.
