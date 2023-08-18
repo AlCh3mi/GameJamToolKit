@@ -12,11 +12,9 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
         private static Dictionary<string, Profile> _profiles;
         private static string profileManifestPath;
 
-        public const string SAVE_DIRECTORY = "SaveGames";
-        public const string SAVE_FILE_EXTENSION = ".sav";
         private const string PROFILE_MANIFEST_FILE = "Manifest.json";
         private const string DEFAULT_SLOT_NAME = "default";
-
+        
         public static Profile ActiveProfile
         {
             get => _activeProfile;
@@ -43,15 +41,15 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             SetActiveProfile(DEFAULT_SLOT_NAME);
         }
 
-        public static void SetActiveProfile(string slotName)
+        public static void SetActiveProfile(string profileName)
         {
-            if (!Profiles.ContainsKey(slotName))
-                AddToManifest(new Profile { Name = slotName, LastSave = DateTime.Now});
+            if (!Profiles.ContainsKey(profileName))
+                AddToManifest(new Profile { Name = profileName, LastSave = DateTime.Now});
 
-            var slot = Profiles[slotName];
+            var slot = Profiles[profileName];
             ActiveProfile = slot;
 
-            Debug.Log("Save Slot Activated: " +slotName);
+            Debug.Log("Save Slot Activated: " +profileName);
         }
         
         public static void UpdateProfile(Profile profile)
@@ -60,7 +58,18 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             Profiles[profile.Name] = profile;
             SaveManifest();
         }
+        
+        public static void DeleteProfile(Profile profile)
+        {
+            var directory = SaveSystem.GetSaveFolder(profile.Name);
+            
+            if(!Directory.Exists(directory))
+                return;
+            
+            Directory.Delete(directory, true);
+        }
 
+        #region Manifest
         public static void AddToManifest(Profile profile)
         {
             if (Profiles.ContainsKey(profile.Name)) 
@@ -69,17 +78,12 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             Profiles[profile.Name] = profile;
             SaveManifest();
         }
-
-        public static string GetSaveFolder(string slotName)
+        
+        private static void SaveManifest()
         {
-            return Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY, slotName);
-        }
-
-        public static string GetSaveFilePath(string slotName, string key)
-        {
-            var saveDirectory = GetSaveFolder(slotName);
-            var saveFilePath = Path.Combine(saveDirectory, key + SAVE_FILE_EXTENSION);
-            return saveFilePath;
+            var json = JsonConvert.SerializeObject(_profiles);
+            File.WriteAllText(profileManifestPath, json);
+            Debug.Log("SaveSlotManifest saved.");
         }
 
         private static void LoadManifest()
@@ -92,12 +96,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             }
             else _profiles = new Dictionary<string, Profile>();
         }
-
-        private static void SaveManifest()
-        {
-            var json = JsonConvert.SerializeObject(_profiles);
-            File.WriteAllText(profileManifestPath, json);
-            Debug.Log("SaveSlotManifest saved.");
-        }
+        #endregion
     }
 }

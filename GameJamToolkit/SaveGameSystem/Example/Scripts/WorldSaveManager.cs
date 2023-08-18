@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 {
-    public class WorldManager : MonoBehaviour
+    public class WorldSaveManager : MonoBehaviour
     {
         [SerializeField] private string worldSaveName = "world";
         [SerializeField] private WorldObjectsFactory factory;
@@ -22,11 +22,11 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         {
             worldObjects = new List<SaveableObjectData>(FindAllSaveables());
             
-            SaveSystem.Instance
-                .Save(worldSaveName, 
-                    JsonConvert.SerializeObject(worldObjects,
-                        Formatting.Indented,
-                        new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+            var json = JsonConvert.SerializeObject(worldObjects, Formatting.Indented,
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            
+            Debug.Log("World Object Count: "+worldObjects.Count +"\nJson : "+json);
+            SaveSystem.Instance.Save(worldSaveName, json);
         }
 
         [ContextMenu("Load World")]
@@ -56,12 +56,15 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         {
             var saveables = FindObjectsOfType<SomeSaveableObject>();
 
+            Debug.LogWarning(saveables.Length);
+            
             var result = new List<SaveableObjectData>();
 
             foreach (var saveable in saveables)
                 if(saveable.SavableType == SavableType.WorldObject)
                     result.Add(saveable.GetSaveableData());
             
+            Debug.LogWarning(result.Count);
             return result;
         }
     }

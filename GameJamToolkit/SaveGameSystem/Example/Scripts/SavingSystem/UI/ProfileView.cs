@@ -28,5 +28,10 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
             ProfileSelector.SetActiveProfile(profile.Name);
             Selected?.Invoke();
         }
+
+        public void DeleteProfileOnClick()
+        {
+            ProfileSelector.DeleteProfile(profile);
+        }
     }
 }

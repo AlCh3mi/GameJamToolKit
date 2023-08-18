@@ -8,18 +8,11 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
 {
     public class FileSaveSystem : ISaveSystem
     {
-        public bool SaveExists(string key)
-        {
-            var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
-            return File.Exists(saveFilePath);
-        }
-        
         public async Task SaveData(string key, string json)
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveDirectory = ProfileSelector.GetSaveFolder(profileName);
-            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
+            var saveDirectory = SaveSystem.GetSaveFolder(profileName);
+            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
 
             try
             {
@@ -38,7 +31,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
         public async Task<string> LoadData(string key)
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveFilePath = ProfileSelector.GetSaveFilePath(profileName, key);
+            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
             
             try
             {
@@ -57,6 +50,13 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
                 Debug.LogException(e);
             }
             return string.Empty;
+        }
+        
+        public bool SaveExists(string key)
+        {
+            var profileName = ProfileSelector.ActiveProfile.Name;
+            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
+            return File.Exists(saveFilePath);
         }
     }
 }

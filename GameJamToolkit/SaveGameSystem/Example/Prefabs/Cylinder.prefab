@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  radius: 3
   <SavableType>k__BackingField: 2
   <Defaults>k__BackingField:
     posX: 0
@@ -266,5 +265,5 @@ MonoBehaviour:
     maxHealth: 80
     name: WorldObject
     isHostile: 0
-    SavableType: 2
+    savableType: 2
   isHostile: 0

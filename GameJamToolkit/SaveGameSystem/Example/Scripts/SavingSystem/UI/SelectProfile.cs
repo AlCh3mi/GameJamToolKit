@@ -1,5 +1,6 @@
 ﻿using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
 {
@@ -7,6 +8,8 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
     {
         [SerializeField] private ProfileView prefab;
         [SerializeField] private Transform parent;
+        [SerializeField] private Button selectProfileButton;
+        [SerializeField] private Button playButton;
         
         private void Start()
         {
@@ -30,6 +33,8 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
                 instance.Selected += () =>
                 {
                     gameObject.SetActive(false);
+                    selectProfileButton.gameObject.SetActive(true);
+                    playButton.gameObject.SetActive(true);
                 };
             }
         }

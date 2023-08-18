@@ -13,7 +13,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         public float maxHealth;
         public string name;
         public bool isHostile;
-        public GUID id;
         public SavableType savableType;
     }
 }
