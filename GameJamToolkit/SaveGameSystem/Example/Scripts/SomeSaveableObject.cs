@@ -1,10 +1,10 @@
 ﻿using IceBlink.GameJamToolkit.DamageSystem;
+using IceBlink.GameJamToolkit.DamageSystem.Damage;
 using IceBlink.GameJamToolkit.DamageSystem.Defenses;
-using IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem;
-using UnityEditor;
+using IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 {
     public class SomeSaveableObject : MonoBehaviour
     {
@@ -22,7 +22,13 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 
         private void Update()
         {
-            transform.Rotate(Vector3.up * speed, Space.Self);
+            //transform.Rotate(Vector3.up * speed, Space.Self);
+        }
+
+        public void OnDamaged(DamageReport damageReport)
+        {
+            var t = damageable.Health.Current / damageable.Health.Max;
+            GetComponent<MeshRenderer>().material.SetColor("_Emission", Color.Lerp(Color.green, Color.red, t));
         }
         
         public void LoadFromSaveableData(SaveableObjectData worldObjectData)

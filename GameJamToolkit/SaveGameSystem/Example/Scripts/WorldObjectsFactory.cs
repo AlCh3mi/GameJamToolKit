@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem;
+using IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 {
     public class WorldObjectsFactory : MonoBehaviour
     {
         [SerializeField] private SomeSaveableObject prefab;
 
         [Header("Defaults")]
-        [SerializeField] private int amount;
-        [SerializeField] private float radius = 3f;
+        [SerializeField] private int columns = 8;
+        [SerializeField] private int rows = 8;
         
         private int spawnedObjectCount = 0;
         
@@ -31,7 +31,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         
         public SomeSaveableObject SpawnWorldObject(SaveableObjectData data)
         {
-            var instance = Instantiate(prefab);
+            var instance = Instantiate(prefab, transform);
             ++spawnedObjectCount;
             if(data != null) instance.LoadFromSaveableData(data);
             return instance;
@@ -39,14 +39,13 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
 
         public void SetupDefaultWorld()
         {
-            for (int i = 0; i < amount; i++)
+            for (int x = 0; x < columns; x++)
             {
-                var angle = i * (360f / amount + 1);
-                var instance = SpawnWorldObject(prefab.Defaults);
-                instance.transform.position = new Vector3(
-                    transform.position.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad), 
-                    transform.position.y,
-                    transform.position.z + radius * Mathf.Sin(angle * Mathf.Deg2Rad));
+                for (int y = 0; y < rows; y++)
+                {
+                    var instance = SpawnWorldObject(prefab.Defaults);
+                    instance.transform.position = new Vector3(x, y, 0f);
+                }
             }
         }
     }

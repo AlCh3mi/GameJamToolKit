@@ -13,11 +13,10 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
         [SerializeField] private SaveSystemType saveType = SaveSystemType.FileSave;
         [field: SerializeField] public SaveSlot ActiveSlot { get; private set; } = SaveSlot.Slot00;
         
-        private ISaveSystem saveSystem;
+        [SerializeField] private string SAVE_DIRECTORY = "SaveGames";
+        [SerializeField] private string SAVE_FILE_EXTENSION = ".sav";
         
-        public const string SAVE_DIRECTORY = "SaveGames";
-        public const string SAVE_FILE_EXTENSION = ".sav";
-
+        private ISaveSystem saveSystem;
         
         protected override void Awake()
         {
@@ -64,15 +63,19 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
         public void SetActiveSlot(SaveSlot slot) => ActiveSlot = slot;
 
         #region SavePath
-        public static string GetSaveFolder(string slotName)
-            => Path.Combine(Application.persistentDataPath, SAVE_DIRECTORY, slotName, SaveSystem.Instance.ActiveSlot.ToString());
+        public static string GetSaveFolder(string profileName)
+            => Path.Combine(GetProfileFolder(profileName), Instance.ActiveSlot.ToString());
+
+        public static string GetProfileFolder(string profileName)
+            => Path.Combine(Application.persistentDataPath, Instance.SAVE_DIRECTORY, profileName);
 
         public static string GetSaveFilePath(string profileName, string key)
         {
             var saveDirectory = GetSaveFolder(profileName);
-            var saveFilePath = Path.Combine(saveDirectory, key + SAVE_FILE_EXTENSION);
+            var saveFilePath = Path.Combine(saveDirectory, key + Instance.SAVE_FILE_EXTENSION);
             return saveFilePath;
         }
         #endregion
+        
     }
 }

@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
 {
-    //this should probably just use a button, but here we are
-    public class ProfileView : MonoBehaviour, IPointerClickHandler 
+    public class ProfileView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private TMP_Text slotNameText;
         [SerializeField] private TMP_Text lastSavedText;
@@ -31,7 +30,9 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
 
         public void DeleteProfileOnClick()
         {
+            Debug.Log("Deleting Profile : "+profile.Name);
             ProfileSelector.DeleteProfile(profile);
+            GetComponentInParent<SelectProfile>().Repaint();
         }
     }
 }

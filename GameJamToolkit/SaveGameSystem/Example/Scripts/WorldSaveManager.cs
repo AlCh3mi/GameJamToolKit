@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem;
+using System.Linq;
+using IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 {
     public class WorldSaveManager : MonoBehaviour
     {
@@ -16,6 +17,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         {
             if (!factory) factory = GetComponent<WorldObjectsFactory>();
         }
+        
 
         [ContextMenu("Save World")]
         public void SaveWorld()
@@ -56,16 +58,50 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
         {
             var saveables = FindObjectsOfType<SomeSaveableObject>();
 
-            Debug.LogWarning(saveables.Length);
-            
             var result = new List<SaveableObjectData>();
 
             foreach (var saveable in saveables)
                 if(saveable.SavableType == SavableType.WorldObject)
                     result.Add(saveable.GetSaveableData());
             
-            Debug.LogWarning(result.Count);
             return result;
         }
+        
+        private static void DestroyAllWorldObjects()
+        {
+            var saveables = FindObjectsOfType<SomeSaveableObject>();
+
+            foreach (var saveable in saveables.Where(x => x.SavableType == SavableType.WorldObject))
+                Destroy(saveable.gameObject);
+        }
+
+        #region GUI
+        [SerializeField] private bool showGUIButtons = true;
+        
+        public void ShowGUIButtons(bool enable) => showGUIButtons = enable;
+        
+        private void OnGUI()
+        {
+            if(!showGUIButtons)
+                return;
+            
+            if (GUI.Button(new Rect(15, 15, 150, 50), "Save"))
+            {
+                SaveWorld();
+            }
+
+            if (GUI.Button(new Rect(15, 85, 150, 50), "Load"))
+            {
+                DestroyAllWorldObjects();
+                LoadWorld();
+            }
+
+            if (GUI.Button(new Rect(15, 155, 150, 50), "New"))
+            {
+                DestroyAllWorldObjects();
+                factory.SetupDefaultWorld();
+            }
+        }
+        #endregion
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem.UI
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
 {
     public class SelectProfile : MonoBehaviour
     {

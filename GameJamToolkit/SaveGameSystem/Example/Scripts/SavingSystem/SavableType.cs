@@ -1,4 +1,4 @@
-﻿namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem
+﻿namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem
 {
     public enum SavableType
     {

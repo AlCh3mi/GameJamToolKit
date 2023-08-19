@@ -1,8 +1,7 @@
 ﻿using System;
-using IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts.SavingSystem;
-using UnityEditor;
+using IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem;
 
-namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.Scripts
+namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 {
     [Serializable]
     public class SaveableObjectData
