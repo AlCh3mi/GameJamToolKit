@@ -10,19 +10,13 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
     {
         [SerializeField] private float speed = 1f;
         [field: SerializeField] public SavableType SavableType { get; private set; }
-        [field: SerializeField] public SaveableObjectData Defaults { get; private set; }
-        
+
         public bool isHostile;
         private Damageable damageable;
         
         private void Awake()
         {
             damageable = GetComponent<Damageable>();
-        }
-
-        private void Update()
-        {
-            //transform.Rotate(Vector3.up * speed, Space.Self);
         }
 
         public void OnDamaged(DamageReport damageReport)

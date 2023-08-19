@@ -11,6 +11,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
         [Header("Defaults")]
         [SerializeField] private int columns = 8;
         [SerializeField] private int rows = 8;
+        [SerializeField] private SaveableObjectData values;
         
         private int spawnedObjectCount = 0;
         
@@ -43,7 +44,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
             {
                 for (int y = 0; y < rows; y++)
                 {
-                    var instance = SpawnWorldObject(prefab.Defaults);
+                    var instance = SpawnWorldObject(values);
                     instance.transform.position = new Vector3(x, y, 0f);
                 }
             }
