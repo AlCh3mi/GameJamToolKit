@@ -9,7 +9,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Editor
         [MenuItem("IceBlink/SaveSystem/Show Save Folder")]
         public static void ShowSaveFolder()
         {
-            var path = "file:///" + SaveSystem.GetSaveFolder(ProfileSelector.ActiveProfile.Name);
+            var path = "file:///" + SaveSystem.GetSaveFolderForCurrentSaveSlot(ProfileSelector.ActiveProfile.Name);
             Debug.Log("Opening path: "+path);
             Application.OpenURL(path);
         }    

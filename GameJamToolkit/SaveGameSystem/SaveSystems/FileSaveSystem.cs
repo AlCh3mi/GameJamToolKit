@@ -11,7 +11,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
         public async Task SaveData(string key, string json)
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveDirectory = SaveSystem.GetSaveFolder(profileName);
+            var saveDirectory = SaveSystem.GetSaveFolderForCurrentSaveSlot(profileName);
             var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
 
             try
