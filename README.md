@@ -1,8 +1,8 @@
 # IceBlink - Game Jam Tool Kit
 
-Game Jam Tool Kit is a Unity package designed to aid quick prototyping and streamline game development during game jams. It provides a collection of useful scripts, components, and prefabs and features to help you focus on creating a fun and engaging game without spending too much time on repetitive tasks.
+Game Jam Tool Kit is a Unity package designed to aid quick prototyping and streamline game development during game jams. 
+It provides a collection of useful scripts, components, and prefabs and features to help you focus on creating a fun and engaging game without spending too much time on repetitive tasks.
 
-*Documentation and more sample projects to be released soon*
 
 ## Getting Started
 
@@ -14,11 +14,11 @@ Follow the on-screen instructions to import the package into your project.
 
 ## Audio System
 
-The AudioManager class serves as a centralized hub for managing audio settings and playback in Unity. 
+The *AudioManager* class serves as a centralized hub for managing audio settings and playback in Unity. 
 It provides a convenient way to control various aspects of audio, including master volume, music volume, effects volume, and audio playback. 
 The class is designed with flexibility and customization in mind, allowing for seamless integration into different projects.
 
-At its core, the AudioManager class offers methods to play, pause, and stop music playback, as well as to play one-shot sound effects. 
+At its core, the *AudioManager* class offers methods to play, pause, and stop music playback, as well as to play one-shot sound effects. 
 It utilizes Unity's AudioSource components for music and sound effects, enabling precise control over audio playback.
 
 The class also interacts with and provides an AudioMixer, which is used to manage the audio parameters for different audio groups, such as master, music, and effects. 
@@ -30,7 +30,7 @@ This means that the audio settings selected by the player persist across session
 Additionally, the class is designed with the Singleton pattern, ensuring that there is only one instance of the AudioManager throughout the application. 
 This centralized management simplifies the process of handling audio settings and playback from various parts of the game.
 
-Overall, the AudioManager class provides an organized and efficient solution for managing audio in Unity projects. 
+Overall, the *AudioManager* class provides an organized and efficient solution for managing audio in Unity projects. 
 It offers a customizable foundation for implementing audio-related features while maintaining a clean separation of concerns between audio playback and the underlying audio parameters.
 
 ## Object Pooling
@@ -39,7 +39,7 @@ The provided code snippets are part of a flexible object pooling system designed
 The pooling system revolves around the concept of reusing objects instead of instantiating and destroying them repeatedly, which can lead to memory fragmentation and performance issues.
 
 ### Pool<T> Class:
-The Pool<T> class serves as the base class for creating object pools. It's generic and requires a prefab of the object type you want to pool (T). 
+The *Pool<T>* class serves as the base class for creating object pools. It's generic and requires a prefab of the object type you want to pool (T). 
 You can specify the default size, capacity, and whether to prewarm the pool (create and store objects upfront). The class sets up an ObjectPool<T> instance, managing object retrieval and return.
 
 ### PoolableObject Class:
@@ -53,7 +53,8 @@ It overrides OnEnable to start playing the particle system, and when the particl
 In essence, this pooling system promotes efficient memory management by reusing objects and avoiding costly instantiation and destruction. It can be extended and customized for different object types by inheriting from the Pool<T> class and implementing specific behaviors within the poolable object classes. 
 This approach is especially useful for optimizing performance in scenarios where objects are frequently created and destroyed, such as particles, bullets, enemies, etc.
 
-## [Damage System](GameJamToolkit/DamageSystem/DamageSystemDocumentation.md)
+## Damage System
+[*More detailed documentation here*](GameJamToolkit/DamageSystem/DamageSystemDocumentation.md)
 #### (Examples included)
 
 The DamageSystem is a comprehensive framework that facilitates the implementation of health and damage mechanics. 
@@ -70,7 +71,8 @@ With an emphasis on modularity and extensibility, the DamageSystem streamlines t
 
 Documentation and Tutorials: Comprehensive documentation and example to guide you through the package and its functionalities.
 
-## [Save Game System](GameJamToolkit/SaveGameSystem/SaveSystemDocumentation.md) 
+## Save Game System
+[*More detailed documentation here*](GameJamToolkit/SaveGameSystem/SaveSystemDocumentation.md)
 #### (Examples included)
 
 The SaveGame System offers a versatile framework for implementing a robust game save and load system.
