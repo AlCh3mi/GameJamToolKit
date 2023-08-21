@@ -7,7 +7,6 @@ namespace IceBlink.GameJamToolkit.DamageSystem.Status
         public GameObject GameObject => gameObject;
     }
 
-   
     public interface IStatusAffected
     {
         GameObject GameObject { get; }

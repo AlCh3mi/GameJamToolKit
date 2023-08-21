@@ -9,7 +9,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
         [SerializeField] private WorldSaveManager worldSaveManager;
         [SerializeField] private LoadSlotSelector loadSlotSelector;
         
-        public GameState GameState { get; set; }= GameState.InMenu;
+        public GameState GameState { get; set; } = GameState.InMenu;
 
         public void PlayGame()
         {
