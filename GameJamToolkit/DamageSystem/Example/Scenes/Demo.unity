@@ -934,13 +934,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1
-  <DamageProperties>k__BackingField:
-    <MinAttack>k__BackingField: 8
-    <MaxAttack>k__BackingField: 12
-    <DamageType>k__BackingField: {fileID: 11400000, guid: fbe3dfdb21b8e114280ba5523439f12e,
-      type: 2}
-    <CriticalHitChance>k__BackingField: 50
-    <CriticalHitDamage>k__BackingField: 200
+  <DamageProperties>k__BackingField: {fileID: 11400000, guid: 1355089078f902841bfd02ee0f6adb66,
+    type: 2}
 --- !u!4 &1372213388
 Transform:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
             {
                 using var sr = new StreamReader(saveFilePath);
                 var json = await sr.ReadToEndAsync();
-                Debug.Log($"LoadedData {key} \n{json}");
+                Debug.Log($"LoadedData {key} - {SaveSystem.Instance.ActiveSlotId}\n{json}");
                 return json;
             }
             catch (FileNotFoundException e)

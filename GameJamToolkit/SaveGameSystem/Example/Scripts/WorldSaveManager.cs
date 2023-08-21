@@ -20,7 +20,12 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
                 factory = GetComponent<WorldObjectsFactory>();
         }
 
-        [ContextMenu("Save World")]
+        public void NewWorld()
+        {
+            DestroyAllWorldObjects();
+            factory.SetupDefaultWorld();
+        }
+
         public async void SaveWorld()
         {
             worldObjects = new List<SaveableObjectData>(FindAllSaveables());
@@ -32,9 +37,10 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
             await SaveSystem.Instance.Save(worldSaveName, json);
         }
 
-        [ContextMenu("Load World")]
         public async void LoadWorld()
         {
+            DestroyAllWorldObjects();
+
             if(!SaveSystem.Instance.SaveExists(SaveSystem.Instance.ActiveSlotId))
             {
                 Debug.Log("No Save found. Setting up default world.");
@@ -51,7 +57,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
             }
 
             worldObjects = result;
-
             factory.SpawnWorldObjects(worldObjects);
         }
         
@@ -61,8 +66,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 
             var result = new List<SaveableObjectData>();
 
-            foreach (var saveable in saveables)
-                if(saveable.SavableType == SavableType.WorldObject)
+            foreach (var saveable in saveables.Where(x => x.SavableType == SavableType.WorldObject))
                     result.Add(saveable.GetSaveableData());
             
             return result;
@@ -77,7 +81,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
         }
 
         #region GUI
-        public void ShowGUIButtons(bool enable) => showGUIButtons = enable;
+        public void ShowDebugGUIButtons(bool enable) => showGUIButtons = enable;
         
         private void OnGUI()
         {
@@ -95,8 +99,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 
             if (GUI.Button(new Rect(15, 155, 150, 50), "New"))
             {
-                DestroyAllWorldObjects();
-                factory.SetupDefaultWorld();
+                NewWorld();
             }
             
             if (GUI.Button(new Rect(15, 225, 150, 50), "Delete Current Save"))

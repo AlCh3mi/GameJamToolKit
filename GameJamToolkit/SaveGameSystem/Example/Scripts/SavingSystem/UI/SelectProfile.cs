@@ -10,11 +10,14 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
         [SerializeField] private Transform parent;
         [SerializeField] private Button selectProfileButton;
         [SerializeField] private Button playButton;
-        
-        private void Start()
-        {
-            Repaint();
-        }
+        [SerializeField] private GameObject mainMenu;
+
+
+        private void OnEnable() => GameManager.Instance.GameState = GameState.InMenu;
+
+        private void Start() => Repaint();
+
+        private void OnDisable() => GameManager.Instance.GameState = GameState.InGame;
 
         private void Clear()
         {
@@ -32,9 +35,10 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
                 instance.Setup(kvp.Value);
                 instance.Selected += () =>
                 {
-                    gameObject.SetActive(false);
                     selectProfileButton.gameObject.SetActive(true);
                     playButton.gameObject.SetActive(true);
+                    mainMenu.SetActive(true);
+                    gameObject.SetActive(false);
                 };
             }
         }

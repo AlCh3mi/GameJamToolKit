@@ -17,6 +17,9 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 
         private void Update()
         {
+            if(GameManager.Instance.GameState != GameState.InGame)
+                return;
+            
             if(!Input.GetMouseButton(0))
                 return;
             

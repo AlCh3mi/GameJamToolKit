@@ -13,7 +13,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
 {
     public class SaveSystem : Singleton<SaveSystem>
     {
-        [SerializeField] private SaveSystemType saveType = SaveSystemType.FileSave;
         [field: SerializeField] public SaveSlotId ActiveSlotId { get; private set; } = SaveSlotId.Slot00;
         
         [SerializeField] private string saveDirectory = "SaveGames";
@@ -24,9 +23,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
         protected override void Awake()
         {
             base.Awake();
-            
             saveSystem = new FileSaveSystem();
-            
         }
 
         public async Task Save(string key, string json)
@@ -49,12 +46,22 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
             {
                 Debug.LogError("SaveSystem : Something went wrong - "+e);
             }
-
             return default;
         }
-        
+
         public bool SaveExists(SaveSlotId slotId)
             => saveSystem.SaveExists(slotId);
+
+        public bool HasSaveGames()
+        {
+            foreach (SaveSlotId saveSlotId in Enum.GetValues(typeof(SaveSlotId)))
+            {
+                if (SaveExists(saveSlotId))
+                    return true;
+            }
+
+            return false;
+        }
 
         #region SaveSlots
         public void SetActiveSlot(SaveSlotId slotId)
