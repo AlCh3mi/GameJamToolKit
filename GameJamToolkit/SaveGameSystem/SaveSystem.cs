@@ -70,9 +70,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
         public DateTime GetLastModified(SaveSlotId slotId)
             => Directory.GetLastWriteTime(GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId));
 
-        public bool SlotIsPopulated(SaveSlotId slotId)
-            => Directory.Exists(GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId));
-
         public void DeleteSaveSlot(SaveSlotId slotId)
         {
             var directory = GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId);

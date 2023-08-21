@@ -14,26 +14,43 @@ Select "Import Package" > "Custom Package" and choose the downloaded .unitypacka
 
 Follow the on-screen instructions to import the package into your project.
 
-## Features
-
-- Damage System
-- Object Pooling
-- Save Game System
-- MonoBehaviour state machine
-- Simple Audio System
-- Asset Management tools
-- Scriptable Object Game Events
-
 ## [Damage System](GameJamToolkit/DamageSystem/DamageSystemDocumentation.md)
-Imagine a descriptive description here about this cool yet simple, yet clean, yet extendable dope ass damage system
 
-Damage, Health, Defense, DamageTypes Indicators, example scene, prefabs
+The DamageSystem is a comprehensive framework that facilitates the implementation of health and damage mechanics. 
+It encompasses a set of classes, structures, and interfaces designed to handle:
+- damage instances, 
+- damage over time, 
+- resistance calculations. 
+- critical hits, 
+- health management, 
+- health regeneration, 
+- damage indicators. 
 
-Documentation and Tutorials: Comprehensive documentation and step-by-step tutorials to guide you through the package and its functionalities.
+With an emphasis on modularity and extensibility, the DamageSystem streamlines the process of integrating complex health and damage interactions
+
+Documentation and Tutorials: Comprehensive documentation and example to guide you through the package and its functionalities.
 
 ## Object Pooling
 
-## [Save Game System](GameJamToolkit/SaveGameSystem/Documentation/SaveSystemDocumentation.md)
+## [Save Game System](GameJamToolkit/SaveGameSystem/SaveSystemDocumentation.md) 
+#### (Examples included)
+
+The SaveGame System offers a versatile framework for implementing a robust game save and load system.
+This system is structured around three core components: 
+- Profiles, 
+- Save Slots, 
+- and the Save System itself. 
+
+Profiles allow users to create distinct save data sets, each with its own last save timestamp. 
+
+Save Slots enable users to manage multiple save points within a single profile, offering flexibility in managing progress. 
+The Save System orchestrates the actual saving and loading of data, supporting various implementations such as 
+- PlayerPrefs, 
+- local file storage(included), 
+- or cloud-based services like Firebase. 
+
+This system empowers developers to seamlessly integrate save and load capabilities into their projects, 
+enhancing user experiences by enabling progress persistence and data retention across sessions.
 
 ## MonoBehaviour State Machine
 
@@ -41,7 +58,7 @@ Documentation and Tutorials: Comprehensive documentation and step-by-step tutori
 
 ## Game Events
 
-## Asset Library
+## Asset Management
 
 ## Contributing
 

@@ -64,7 +64,6 @@ SaveExists(slotId: SaveSlotId): Checks if a save exists for a specific save slot
 HasSaveGames(): Checks if there are any save games across all save slots.<br>
 SetActiveSlot(slotId: SaveSlotId): Sets the active save slot.<br>
 GetLastModified(slotId: SaveSlotId): Gets the last modified date for a specific save slot.<br>
-SlotIsPopulated(slotId: SaveSlotId): Checks if a specific save slot is populated.<br>
 DeleteSaveSlot(slotId: SaveSlotId): Deletes data associated with a specific save slot.<br>
 
 ## Helper Methods
