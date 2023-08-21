@@ -1,4 +1,5 @@
-﻿using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
+﻿using System.Linq;
+using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
     {
         [SerializeField] private Button createButton;
         [SerializeField] private TMP_InputField inputField;
-        [SerializeField] private int minLength = 5;
+        [SerializeField] private int minLength = 4;
         private void OnEnable()
         {
             inputField.onValueChanged.AddListener(OnInputFieldValueChanged);
@@ -32,7 +33,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example.SavingSystem.UI
         private void OnInputFieldValueChanged(string value)
         {
             //todo: maybe regex? find out if there is a regex for OS filename restrictions
-            var isValidInput = !string.IsNullOrWhiteSpace(value) && value.Trim().Length >= minLength;
+            var isValidInput = !ProfileSelector.Profiles.Keys.Contains(value) && !string.IsNullOrWhiteSpace(value) && value.Trim().Length >= minLength;
             createButton.interactable = isValidInput;
         }
     }

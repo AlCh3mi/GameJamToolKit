@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
+using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
 using UnityEngine;
 
 namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
@@ -12,7 +13,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
             var saveDirectory = SaveSystem.GetSaveFolderForCurrentSaveSlot(profileName);
-            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
+            var saveFilePath = SaveSystem.GetSaveFilePathForCurrentSaveSlot(profileName, key);
 
             try
             {
@@ -31,7 +32,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
         public async Task<string> LoadData(string key)
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
+            var saveFilePath = SaveSystem.GetSaveFilePathForCurrentSaveSlot(profileName, key);
             
             try
             {
@@ -52,11 +53,20 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems
             return string.Empty;
         }
         
-        public bool SaveExists(string key)
+        public bool SaveExists(SaveSlotId slotId)
         {
             var profileName = ProfileSelector.ActiveProfile.Name;
-            var saveFilePath = SaveSystem.GetSaveFilePath(profileName, key);
-            return File.Exists(saveFilePath);
+            var saveFilePath = SaveSystem.GetSaveFolder(profileName, slotId);
+            return Directory.Exists(saveFilePath);
+        }
+        
+        public void DeleteSave(string key)
+        {
+            var profileName = ProfileSelector.ActiveProfile.Name;
+            var saveFilePath = SaveSystem.GetSaveFilePathForCurrentSaveSlot(profileName, key);
+            
+            if(File.Exists(saveFilePath))
+                File.Delete(saveFilePath);
         }
     }
 }

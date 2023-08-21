@@ -1,6 +1,6 @@
-﻿namespace IceBlink.GameJamToolkit.SaveGameSystem
+﻿namespace IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots
 {
-    public enum SaveSlot
+    public enum SaveSlotId
     {
         Slot00,
         Slot01,

@@ -8,13 +8,12 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
 {
     public static class ProfileSelector
     {
-        private static string profileManifestPath;
-        private static Profile _activeProfile;
-        private static Dictionary<string, Profile> _profiles;
-
         private const string PROFILE_MANIFEST_FILE = "Manifest.json";
         private const string DEFAULT_SLOT_NAME = "default";
+        private static string profileManifestPath;
+
         
+        private static Profile _activeProfile;
         public static Profile ActiveProfile
         {
             get => _activeProfile;
@@ -25,6 +24,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             }
         }
 
+        private static Dictionary<string, Profile> _profiles;
         public static Dictionary<string, Profile> Profiles
         {
             get
@@ -66,7 +66,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Profiles
             if(Directory.Exists(directory))
                 Directory.Delete(directory, true);
 
-            if (!Profiles.ContainsKey(profile.Name)) 
+            if (!Profiles.ContainsKey(profile.Name))
                 return;
             
             Profiles.Remove(profile.Name);

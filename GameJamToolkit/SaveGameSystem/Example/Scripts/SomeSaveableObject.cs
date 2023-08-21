@@ -8,7 +8,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
 {
     public class SomeSaveableObject : MonoBehaviour
     {
-        [SerializeField] private float speed = 1f;
         [field: SerializeField] public SavableType SavableType { get; private set; }
 
         public bool isHostile;

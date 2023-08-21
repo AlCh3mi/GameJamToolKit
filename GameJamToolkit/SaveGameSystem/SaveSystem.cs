@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+using IceBlink.GameJamToolkit.SaveGameSystem.Profiles;
+using IceBlink.GameJamToolkit.SaveGameSystem.SaveSlots;
 using IceBlink.GameJamToolkit.SaveGameSystem.SaveSystems;
 using IceBlink.GameJamToolkit.Singletons;
 using Newtonsoft.Json;
@@ -11,7 +14,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
     public class SaveSystem : Singleton<SaveSystem>
     {
         [SerializeField] private SaveSystemType saveType = SaveSystemType.FileSave;
-        [field: SerializeField] public SaveSlot ActiveSlot { get; private set; } = SaveSlot.Slot00;
+        [field: SerializeField] public SaveSlotId ActiveSlotId { get; private set; } = SaveSlotId.Slot00;
         
         [SerializeField] private string saveDirectory = "SaveGames";
         [SerializeField] private string saveFileExtension = ".sav";
@@ -22,26 +25,18 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
         {
             base.Awake();
             
-            switch (saveType)
-            {
-                default:
-                case SaveSystemType.FileSave:
-                    saveSystem = new FileSaveSystem();
-                    break;
-                case SaveSystemType.PlayerPrefs:
-                    saveSystem = new PlayerPrefSaveSystem();
-                    break;
-            }
-            Debug.Log("Save System Created: "+saveSystem.GetType().Name);
+            saveSystem = new FileSaveSystem();
+            
         }
 
-        public void Save(string key, string json) => saveSystem.SaveData(key, json);
+        public async Task Save(string key, string json)
+            => await saveSystem.SaveData(key, json);
 
         public async Task<T> Load<T>(string key)
         {
             try
             {
-                if (!SaveExists(key))
+                if (!SaveExists(ActiveSlotId))
                 {
                     Debug.LogWarning("SaveSystem: Save file does not exist.");
                     return default;
@@ -57,22 +52,40 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem
 
             return default;
         }
+        
+        public bool SaveExists(SaveSlotId slotId)
+            => saveSystem.SaveExists(slotId);
 
-        public bool SaveExists(string key) => saveSystem.SaveExists(key);
+        #region SaveSlots
+        public void SetActiveSlot(SaveSlotId slotId)
+            => ActiveSlotId = slotId;
+        
+        public DateTime GetLastModified(SaveSlotId slotId)
+            => Directory.GetLastWriteTime(GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId));
 
-        public void SetActiveSlot(SaveSlot slot) => ActiveSlot = slot;
+        public bool SlotIsPopulated(SaveSlotId slotId)
+            => Directory.Exists(GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId));
 
+        public void DeleteSaveSlot(SaveSlotId slotId)
+        {
+            var directory = GetSaveFolder(ProfileSelector.ActiveProfile.Name, slotId);
+            
+            if(Directory.Exists(directory))
+                Directory.Delete(directory, true);
+        }
+        #endregion
+        
         #region SavePath
         public static string GetProfileFolder(string profileName)
             => Path.Combine(Application.persistentDataPath, Instance.saveDirectory, profileName);
 
-        public static string GetSaveFolder(string profileName, SaveSlot slot)
-            => Path.Combine(GetProfileFolder(profileName), slot.ToString());
+        public static string GetSaveFolder(string profileName, SaveSlotId slotId)
+            => Path.Combine(GetProfileFolder(profileName), slotId.ToString());
 
         public static string GetSaveFolderForCurrentSaveSlot(string profileName)
-            => GetSaveFolder(profileName, Instance.ActiveSlot);
+            => GetSaveFolder(profileName, Instance.ActiveSlotId);
 
-        public static string GetSaveFilePath(string profileName, string key)
+        public static string GetSaveFilePathForCurrentSaveSlot(string profileName, string key)
         {
             var saveDirectory = GetSaveFolderForCurrentSaveSlot(profileName);
             var saveFilePath = Path.Combine(saveDirectory, key + Instance.saveFileExtension);

@@ -10,17 +10,18 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
     {
         [SerializeField] private string worldSaveName = "world";
         [SerializeField] private WorldObjectsFactory factory;
+        [SerializeField] private bool showGUIButtons = true;
         
         private List<SaveableObjectData> worldObjects = new ();
 
         private void Awake()
         {
-            if (!factory) factory = GetComponent<WorldObjectsFactory>();
+            if (!factory) 
+                factory = GetComponent<WorldObjectsFactory>();
         }
-        
 
         [ContextMenu("Save World")]
-        public void SaveWorld()
+        public async void SaveWorld()
         {
             worldObjects = new List<SaveableObjectData>(FindAllSaveables());
             
@@ -28,13 +29,13 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
                 new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             
             Debug.Log("World Object Count: "+worldObjects.Count +"\nJson : "+json);
-            SaveSystem.Instance.Save(worldSaveName, json);
+            await SaveSystem.Instance.Save(worldSaveName, json);
         }
 
         [ContextMenu("Load World")]
         public async void LoadWorld()
         {
-            if(!SaveSystem.Instance.SaveExists(worldSaveName))
+            if(!SaveSystem.Instance.SaveExists(SaveSystem.Instance.ActiveSlotId))
             {
                 Debug.Log("No Save found. Setting up default world.");
                 factory.SetupDefaultWorld();
@@ -76,8 +77,6 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
         }
 
         #region GUI
-        [SerializeField] private bool showGUIButtons = true;
-        
         public void ShowGUIButtons(bool enable) => showGUIButtons = enable;
         
         private void OnGUI()
@@ -86,9 +85,7 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
                 return;
             
             if (GUI.Button(new Rect(15, 15, 150, 50), "Save"))
-            {
                 SaveWorld();
-            }
 
             if (GUI.Button(new Rect(15, 85, 150, 50), "Load"))
             {
@@ -101,6 +98,9 @@ namespace IceBlink.GameJamToolkit.SaveGameSystem.Example
                 DestroyAllWorldObjects();
                 factory.SetupDefaultWorld();
             }
+            
+            if (GUI.Button(new Rect(15, 225, 150, 50), "Delete Current Save"))
+                SaveSystem.Instance.DeleteSaveSlot(SaveSystem.Instance.ActiveSlotId);
         }
         #endregion
     }
